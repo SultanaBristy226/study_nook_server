@@ -10,8 +10,10 @@ const bookingRoutes = require('./routes/bookings');
 
 const app = express();
 
-connectDB();
-
+app.use(async (req, res, next) => {
+  await connectDB();
+  next();
+});
 const allowedOrigins = [
   'http://localhost:5173',
   process.env.CLIENT_URL,
